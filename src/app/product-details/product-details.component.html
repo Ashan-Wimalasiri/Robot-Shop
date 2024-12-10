@@ -1,0 +1,21 @@
+<div class="product">
+    <div class="product-details">
+      <img src="{{getImageUrl(product)}}" [alt]="product.name" />
+      <div class="product-info">
+        <div class="name red">{{ product.name }}</div>
+        <div class="description">{{ product.description }}</div>
+        <div class="category">Part Type: {{ product.category }}</div>
+      </div>
+    </div>
+    <div class="price">
+      <div 
+        [ngClass]="getDiscountedClasses(product)"
+        [ngStyle]="{color: product.discount > 0 ? 'red' : ''}"
+        > {{ product.price | currency: "USD" }}</div> <!--to fixed is used to indicate 2 decimal places-->
+      
+      <div class="discount" [hidden] = "product.discount <= 0">
+        {{ (product.price -  (product.price * product.discount)) | currency: "USD" }}
+      </div>
+      <button class="cta" (click)="buyButtonClicked(product)">Buy</button>
+    </div>
+  </div>
